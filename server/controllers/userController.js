@@ -1,9 +1,10 @@
 const { User } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const findAllUsers = async (req, res) => {
   try {
-    const responce = await User.findAll({});
-    res.json(responce);
+    const response = await User.findAll({});
+    res.json(response);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -17,7 +18,8 @@ const signup = async (req, res) => {
       username: username,
       password: password,
     });
-    res.status(200).json(newUserData);
+    const token = signToken(newUserData);
+    res.status(200).json({ token: token, user: newUserData });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -40,7 +42,8 @@ const login = async (req, res) => {
       if (!isMatch) {
         res.status(500).json("The password is incorrect");
       } else {
-        res.status(200).json(userData);
+        const token = signToken(userData);
+        res.status(200).json({ token: token, user: userData });
       }
     }
 
