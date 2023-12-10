@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS stream_db;
+CREATE DATABASE stream_db;
