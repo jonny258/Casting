@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Auth from "../utils/auth";
 import SignUpForm from "./signup";
 import LoginForm from "./login";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const [showLogin, setShowLogin] = useState(false);
@@ -27,6 +28,15 @@ function NavBar() {
 
           <div>
             <ul className="flex space-x-4">
+              <li>
+                <Link
+                  href="#home"
+                  className="hover:text-gray-300"
+                  to="/startstream"
+                >
+                  Start Stream
+                </Link>
+              </li>
               {!Auth.loggedIn() && (
                 <li>
                   <a
