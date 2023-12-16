@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import Auth from "../utils/auth";
+import Modal from "../helpers/modal";
 
-function LoginForm({ setShowSignup, setShowLogin }) {
+function LoginForm({ setShowSignup, setShowLogin, handleClose }) {
   // const [formData, setFormData] = useState({
   //     username: '',
   //     password: '',
@@ -40,7 +41,7 @@ function LoginForm({ setShowSignup, setShowLogin }) {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <Modal showModal={true} handleClose={handleClose} title={"Login"}>
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h1>Login</h1>
         <div className="mb-4">
@@ -94,7 +95,7 @@ function LoginForm({ setShowSignup, setShowLogin }) {
           </button>
         </div>
       </form>
-    </div>
+    </Modal>
   );
 }
 

@@ -1,0 +1,26 @@
+.card-container {
+    background-color: purple; /* Set the background color */
+    display: inline-block; /* Or use another display property that suits your layout */
+  }
+  
+  .figure-hover {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .figure-hover:hover {
+    transform: translate(10px, -10px);
+  }
+  
+  .overlay-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+  
