@@ -1,9 +1,18 @@
 import React from "react";
 import "../style/imageCard.css";
+import { useNavigate } from "react-router-dom";
 
-function ImageCard() {
+function ImageCard({streamRoom}) {
+
+  const navigate = useNavigate();
+
+  const cardClickHandler = () => {
+    console.log(streamRoom)
+    navigate("/stream")
+  }
+
   return (
-    <div className="card w-80 bg-base-100 shadow-xl m-1 rounded-none">
+    <div className="card w-80 bg-base-100 shadow-xl m-1 rounded-none" onClick={cardClickHandler}>
       <div className="card-container">
         <figure className="figure-hover">
           <img

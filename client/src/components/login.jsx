@@ -41,18 +41,21 @@ function LoginForm({ setShowSignup, setShowLogin, handleClose }) {
   };
 
   return (
-    <Modal showModal={true} handleClose={handleClose} title={"Login"}>
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h1>Login</h1>
+    <Modal
+      showModal={true}
+      handleClose={handleClose}
+      title={"Log in to Stream Z"}
+    >
+      <form className="bg-gray-900 p-8 rounded-lg space-y-6">
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-white text-sm font-bold mb-2"
             htmlFor="username"
           >
             Username
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-gray-800 text-white border border-purple-600 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:border-purple-800"
             id="username"
             type="text"
             placeholder="Username"
@@ -62,37 +65,48 @@ function LoginForm({ setShowSignup, setShowLogin, handleClose }) {
         </div>
         <div className="mb-6">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-white text-sm font-bold mb-2"
             htmlFor="password"
           >
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-gray-800 text-white border border-purple-600 rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:border-purple-800"
             id="password"
             type="password"
             placeholder="********"
             name="password"
             ref={passwordRef}
           />
+          <a
+            href="#"
+            className="inline-block align-baseline font-bold text-sm text-purple-600 hover:text-purple-800"
+          >
+            Trouble logging in?
+          </a>
         </div>
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-purple-600 w-full hover:bg-purple-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
             onClick={handleSubmit}
           >
-            Login
+            Log In
           </button>
-          <button
-            onClick={() => {
-              // event.preventDefault()
-              setShowSignup(true);
-              setShowLogin(false);
-            }}
-            className="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Go to Sign Up
-          </button>
+        </div>
+        <div className="text-center mt-4">
+          <p className="text-white">
+            Don’t have an account?{" "}
+            <a
+              className="text-purple-600 hover:text-purple-800"
+              onClick={() => {
+                setShowLogin(false);
+                setShowSignup(true);
+              }}
+            >
+              Sign up
+            </a>
+          </p>
         </div>
       </form>
     </Modal>

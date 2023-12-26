@@ -3,107 +3,79 @@ import Auth from "../utils/auth";
 import SignUpForm from "./signup";
 import LoginForm from "./login";
 import { Link } from "react-router-dom";
+import logo from "../assets/Logo.png";
 
 function NavBar() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignUp, setShowSignup] = useState(false);
+
+  const handleLogout = () => {
+    Auth.logout();
+    // other logout logic if needed
+  };
+
   return (
     <>
-      <nav className="bg-gray-800 text-white p-4 w-full">
-        <div className="flex justify-between items-center w-full">
-          <div className="text-lg font-semibold">Stream Name</div>
-          <div className="relative mx-auto" style={{ width: "600px" }}>
-            <input
-              type="text"
-              placeholder="Search..."
-              className="text-black w-full pl-4 pr-10 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-            />
-            <button
-              className="absolute right-0 top-0 h-full px-4 text-center text-gray-800 hover:text-blue-500 flex items-center justify-center"
-              type="submit"
-            >
-              Search
-            </button>
-          </div>
-
-          <div>
-            <ul className="flex space-x-4">
-              <li>
-                <Link
-                  href="#home"
-                  className="hover:text-gray-300"
-                  to="/startstream"
-                >
-                  Start Stream
-                </Link>
-              </li>
-              {!Auth.loggedIn() && (
-                <li>
-                  <a
-                    href="#home"
-                    className="hover:text-gray-300"
-                    onClick={() => {
-                      setShowLogin(true);
-                    }}
-                  >
-                    Log-In
-                  </a>
-                </li>
-              )}
-              {!Auth.loggedIn() && (
-                <li>
-                  <a
-                    href="#about"
-                    className="hover:text-gray-300"
-                    onClick={() => {
-                      setShowSignup(true);
-                    }}
-                  >
-                    Sign-Up
-                  </a>
-                </li>
-              )}
-              {Auth.loggedIn() && (
-                <li>
-                  <a
-                    href="#services"
-                    className="hover:text-gray-300"
-                    onClick={() => {
-                      Auth.logout();
-                      setShowSignup(true);
-                    }}
-                  >
-                    Log-Out
-                  </a>
-                </li>
-              )}
-              {Auth.loggedIn() && (
-                <li>
-                  <a href="#contact" className="hover:text-gray-300">
-                    Profile
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
+      <div className="navbar bg-base-100">
+        <div className="flex-none">
+          <Link to="/" className="btn btn-ghost normal-case text-xl">
+            <img src={logo} className="w-10 mx-1" alt="Logo" />
+            Stream Z
+          </Link>
+          <Link to="/startstream" className="btn btn-ghost btn-sm">
+            Start Stream
+          </Link>
         </div>
-      </nav>
+        <div className="flex-1 mx-2">
+          <input
+            type="text"
+            placeholder="Type here"
+            className="input input-bordered w-full max-w-xs"
+          />
+        </div>
+        <div className="flex-none">
+          {!Auth.loggedIn() ? (
+            <>
+              <button
+                className="btn btn-neutral btn-sm"
+                onClick={() => setShowLogin(true)}
+              >
+                Log In
+              </button>
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={() => setShowSignup(true)}
+              >
+                Sign Up
+              </button>
+            </>
+          ) : (
+            <>
+              {/* <Link to="/startstream" className="btn btn-ghost btn-sm">
+                Start Stream
+              </Link> */}
+              <button className="btn btn-ghost btn-sm" onClick={handleLogout}>
+                Log-Out
+              </button>
+              <Link to="/profile" className="btn btn-ghost btn-sm">
+                Profile
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
       {showSignUp && (
         <SignUpForm
           setShowSignup={setShowSignup}
           setShowLogin={setShowLogin}
-          handleClose={() => {
-            setShowSignup(false);
-          }}
+          handleClose={() => setShowSignup(false)}
         />
       )}
       {showLogin && (
         <LoginForm
           setShowSignup={setShowSignup}
           setShowLogin={setShowLogin}
-          handleClose={() => {
-            setShowLogin(false);
-          }}
+          handleClose={() => setShowLogin(false)}
         />
       )}
     </>
