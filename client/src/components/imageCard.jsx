@@ -8,7 +8,7 @@ function ImageCard({streamRoom}) {
 
   const cardClickHandler = () => {
     console.log(streamRoom)
-    navigate("/stream")
+    navigate("/stream", {state: {streamRoom: streamRoom}})
   }
 
   return (

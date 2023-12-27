@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import NavBar from "../components/navbar";
 import Sidebar from "../components/sidebar";
 import VideoPlayer from "../components/videoPlayer";
@@ -7,6 +8,15 @@ import testVideo from "../assets/TestVideo.mp4";
 import "../style/stream.css";
 
 function WatchStream() {
+  // Access the location object
+  const location = useLocation();
+
+  // Access the state passed to this route from the navigate function
+  const { streamRoom } = location.state || {};
+
+  // Use streamRoom as needed in your component, for example passing it to VideoPlayer
+  // If streamRoom is not defined, you can have a fallback or a default value
+
   return (
     <div className="flex flex-col h-screen">
       <NavBar />
@@ -14,12 +24,12 @@ function WatchStream() {
         <Sidebar />
         <div className="flex p-4 overflow-auto">
           <div className="stream-video">
-            {/* VideoPlayer component embedding the MP4 video */}
-            <VideoPlayer src={testVideo} />
+            {/* Pass streamRoom to VideoPlayer if needed */}
+            <VideoPlayer src={testVideo} streamRoom={streamRoom} />
           </div>
           <div className="stream-chat-container overflow-auto">
-            {/* StreamChat component to show chat messages */}
-            <StreamChat />
+            {/* Pass streamRoom to StreamChat if needed */}
+            <StreamChat streamRoom={streamRoom} />
           </div>
         </div>
       </div>

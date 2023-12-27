@@ -17,7 +17,7 @@ io.on("connection", (socket) => {
     if (room === "") {
       socket.broadcast.emit("receive-message", message);
     } else {
-      socket.to(room).emit("receive-message", message);
+      io.in(room).emit("receive-message", message);
     }
   });
   socket.on("join-room", (room) => {
